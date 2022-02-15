@@ -36,6 +36,7 @@ int Game::play() {
         this->vis->visualize(*this->board);
 
         auto result = this->board->check_win();
+
         if (result != -1) {
             return result;
         }

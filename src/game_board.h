@@ -8,6 +8,7 @@
 #include "status.h"
 
 #include <vector>
+#include <iostream>
 
 constexpr int BOARD_SIZE = 3;
 
@@ -23,6 +24,8 @@ public:
     ErrorCode valid_move(size_t i, size_t j);
 
     int check_win();
+
+    short to_bin(int state);
 
 };
 
