@@ -9,6 +9,7 @@ enum class ErrorCode {
     OK=0,
     INDEX_OUT_OF_BOUNDS,
     CELL_IS_TAKEN,
+    STATE_OUT_OF_RANGE
 };
 
 #endif //TEMPLATE_STATUS_H

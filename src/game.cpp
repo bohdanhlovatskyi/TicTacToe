@@ -4,6 +4,14 @@
 
 #include "game.h"
 
+Game::Game(AI ai, AI player, Visualizer vis, int state) {
+    this->ai = ai;
+    this->player = player;
+    this->board = board;
+    this->vis = vis;
+    this->state = state;
+}
+
 int Game::play(bool visualize) {
 
     for (;;) {
@@ -33,4 +41,17 @@ int Game::play(bool visualize) {
         }
     }
 
+}
+
+int Game::get_state() {
+    return this->state;
+}
+
+ErrorCode Game::set_state(int state) {
+    if (state == 1 || state == 2) {
+        this.state = state;
+        return ErrorCode::OK;
+    }
+
+    return ErrorCode::STATE_OUT_OF_RANGE;
 }

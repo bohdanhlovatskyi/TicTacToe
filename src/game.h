@@ -7,21 +7,25 @@
 
 #include "status.h"
 #include "game_board.h"
+#include "ai.h"
+#include "visualizer.h"
 
 class Game {
 public:
 
-    Game(AI ai, AI player, Config config) {
-        this->ai = ai;
-        this->player = player;
-        this->config = config;
-    }
+    Game(AI* ai, AI* player, GameBoard* board, Visualizer* vis, int state);
 
     int play(void);
+
+    int get_state(void);
+
+    ErrorCode set_state(int state);
 
 private:
     GameBoard board;
     AI player, ai;
+    Visualizer vis;
+    int state;
 };
 
 #endif //TEMPLATE_GAME_H

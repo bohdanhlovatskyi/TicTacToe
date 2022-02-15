@@ -9,16 +9,18 @@
 
 #include <vector>
 
-constexpr BOARD_SIZE = 3;
+constexpr int BOARD_SIZE = 3;
 
 class GameBoard {
 public:
+    GameBoard() = default;
+
     ErrorCode fil_cell(size_t i, size_t j);
+
+    ErrorCode valid_move(size_t i, size_t j);
 
 private:
     std::vector<std::vector<int>> board;
-
-    ErrorCode valid_move(size_t i, size_t j);
 };
 
 #endif //TEMPLATE_GAME_BOARD_H
