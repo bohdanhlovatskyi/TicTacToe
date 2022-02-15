@@ -29,6 +29,5 @@ ErrorCode GameBoard::fil_cell(size_t i, size_t j, int player) {
 }
 
 int GameBoard::check_win() {
-    // TODO;
-    return true;
+    return -1;
 }

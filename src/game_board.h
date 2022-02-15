@@ -13,9 +13,10 @@ constexpr int BOARD_SIZE = 3;
 
 class GameBoard {
 public:
+    // TODO: 3 here is lame
     std::vector<std::vector<int>> board;
 
-    GameBoard() = default;
+    GameBoard(): board(3, std::vector<int>(3, 0)) {};
 
     ErrorCode fil_cell(size_t i, size_t j, int state);
 

@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     RandomAI* ai = new RandomAI();
 
     GameBoard* gb = new GameBoard();
-    Visualizer* vis = new CLI_Visualizer(*gb);
+    Visualizer* vis = new CLI_Visualizer();
 
     // game should take ai as init
     // as well as status who has to go first

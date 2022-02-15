@@ -25,5 +25,7 @@ std::pair<int, int> RandomAI::next_move(GameBoard &board) {
         j = rand() % 4;
     }
 
+    std::cout << "RandomAI has made his move: (" << i << ", " << j << ")" << std::endl;
+
     return std::make_pair(i, j);
 }

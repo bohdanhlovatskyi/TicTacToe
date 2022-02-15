@@ -12,11 +12,9 @@
 class Visualizer {
 public:
 
-    Visualizer(GameBoard& board);
+    Visualizer() = default;
 
-    Visualizer();
-
-    virtual int visualize(void) = 0;
+    virtual int visualize(GameBoard& board) = 0;
 
     GameBoard board;
 };
@@ -26,7 +24,7 @@ class CLI_Visualizer : public Visualizer {
 
     using Visualizer::Visualizer;
 
-    int visualize(void) override;
+    int visualize(GameBoard& board) override;
 };
 
 #endif //TEMPLATE_VISUALIZER_H

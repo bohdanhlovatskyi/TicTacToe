@@ -33,12 +33,14 @@ int Game::play() {
         this->board->fil_cell(next_move.first, next_move.second, state);
 
         // board should take visualizer class then
-        this->vis->visualize();
+        this->vis->visualize(*this->board);
 
         auto result = this->board->check_win();
         if (result != -1) {
             return result;
         }
+
+        this->set_state(this->get_state() == 1 ? 2 : 1);
     }
 
 }
