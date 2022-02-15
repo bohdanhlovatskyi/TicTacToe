@@ -9,19 +9,22 @@
 #include "game_board.h"
 
 #include <random>
+#include <iostream>
 
 class AI {
 public:
-    virtual std::pair<int, int> next_move(const GameBoard& board);
+    virtual std::pair<int, int> next_move(GameBoard& board) = 0;
 };
 
 // TODO: looks lame
 class RandomAI : public AI {
-    std::pair<int, int> next_move(const GameBoard& board);
+public:
+    std::pair<int, int> next_move(GameBoard& board) override;
 };
 
 class PlayerAI : public AI {
-    std::pair<int, int> next_move(const GameBoard& board);
+public:
+    std::pair<int, int> next_move(GameBoard& board) override;
 };
 
 #endif //TEMPLATE_AI_H

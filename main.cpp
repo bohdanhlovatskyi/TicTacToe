@@ -5,8 +5,13 @@
 #include <torch/torch.h>
 
 #include "src/game.h"
+#include "src/visualizer.h"
+#include "src/ai.h"
+#include "src/game_board.h"
 
 int main(int argc, char* argv[]) {
+    (void) argv; (void) argc;
+
     torch::Tensor tensor = torch::rand({2, 3});
     std::cout << tensor << std::endl;
 
@@ -20,7 +25,7 @@ int main(int argc, char* argv[]) {
     RandomAI* ai = new RandomAI();
 
     GameBoard* gb = new GameBoard();
-    Visualizer* vis = new Visualizer(*gb);
+    Visualizer* vis = new CLI_Visualizer(*gb);
 
     // game should take ai as init
     // as well as status who has to go first

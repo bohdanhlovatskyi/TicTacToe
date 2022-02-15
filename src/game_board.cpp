@@ -27,3 +27,8 @@ ErrorCode GameBoard::fil_cell(size_t i, size_t j, int player) {
 
     return ErrorCode::OK;
 }
+
+int GameBoard::check_win() {
+    // TODO;
+    return true;
+}

@@ -56,10 +56,10 @@ include(cmake/CompilerWarnings.cmake)
 
 #! Project main executable source compilation
 add_executable(${PROJECT_NAME} main.cpp
-				options_parser/options_parser.cpp options_parser/options_parser.h)
+				src/game.cpp src/ai.cpp src/game_board.cpp src/visualizer.cpp)
 
 #! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE options_parser)
+target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 #! Add external packages
 # options_parser requires boost::program_options library

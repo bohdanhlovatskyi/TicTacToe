@@ -7,19 +7,26 @@
 
 #include "game_board.h"
 
+#include <iostream>
+
 class Visualizer {
 public:
 
     Visualizer(GameBoard& board);
 
-    virtual int visualize(void);
+    Visualizer();
 
-private:
+    virtual int visualize(void) = 0;
+
     GameBoard board;
 };
 
+
 class CLI_Visualizer : public Visualizer {
-    int visualize(void);
+
+    using Visualizer::Visualizer;
+
+    int visualize(void) override;
 };
 
 #endif //TEMPLATE_VISUALIZER_H

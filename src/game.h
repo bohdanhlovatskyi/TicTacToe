@@ -22,9 +22,10 @@ public:
     ErrorCode set_state(int state);
 
 private:
-    GameBoard board;
-    AI player, ai;
-    Visualizer vis;
+    GameBoard* board;
+    AI* player{nullptr};
+    AI* ai{nullptr};
+    Visualizer* vis;
     int state;
 };
 

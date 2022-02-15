@@ -4,7 +4,7 @@
 
 #include "game.h"
 
-Game::Game(AI ai, AI player, Visualizer vis, int state) {
+Game::Game(AI* ai, AI* player, GameBoard* board, Visualizer* vis, int state) {
     this->ai = ai;
     this->player = player;
     this->board = board;
@@ -12,10 +12,10 @@ Game::Game(AI ai, AI player, Visualizer vis, int state) {
     this->state = state;
 }
 
-int Game::play(bool visualize) {
+int Game::play() {
 
     for (;;) {
-        auto state = this.get_state();
+        auto state = this->get_state();
 
         std::pair<int, int> next_move;
 
@@ -23,19 +23,19 @@ int Game::play(bool visualize) {
         // in the corresponding method
         switch (state) {
             case 1:
-                next_move = this->player.next_move();
+                next_move = this->player->next_move(*this->board);
                 break;
             case 2:
-                next_move = this->ai.next_move();
+                next_move = this->ai->next_move(*this->board);
                 break;
         }
 
-        this->board.fil_cell(next_move.first, next_move.second, state);
+        this->board->fil_cell(next_move.first, next_move.second, state);
 
         // board should take visualizer class then
-        this->board.visualize();
+        this->vis->visualize();
 
-        auto result = this->board.check_win();
+        auto result = this->board->check_win();
         if (result != -1) {
             return result;
         }
@@ -49,7 +49,7 @@ int Game::get_state() {
 
 ErrorCode Game::set_state(int state) {
     if (state == 1 || state == 2) {
-        this.state = state;
+        this->state = state;
         return ErrorCode::OK;
     }
 

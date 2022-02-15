@@ -13,14 +13,16 @@ constexpr int BOARD_SIZE = 3;
 
 class GameBoard {
 public:
+    std::vector<std::vector<int>> board;
+
     GameBoard() = default;
 
-    ErrorCode fil_cell(size_t i, size_t j);
+    ErrorCode fil_cell(size_t i, size_t j, int state);
 
     ErrorCode valid_move(size_t i, size_t j);
 
-private:
-    std::vector<std::vector<int>> board;
+    int check_win();
+
 };
 
 #endif //TEMPLATE_GAME_BOARD_H
