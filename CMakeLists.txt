@@ -58,6 +58,9 @@ include(cmake/CompilerWarnings.cmake)
 add_executable(${PROJECT_NAME} main.cpp
 				src/game.cpp src/ai.cpp src/game_board.cpp src/visualizer.cpp)
 
+add_executable(test test.cpp
+		src/game.cpp src/ai.cpp src/game_board.cpp src/visualizer.cpp)
+
 #! Put path to your project headers
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
@@ -70,6 +73,8 @@ target_link_libraries(${PROJECT_NAME} Boost::program_options Boost::system)
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+
+target_link_libraries(test "${TORCH_LIBRARIES}")
 
 						
 ##########################################################
