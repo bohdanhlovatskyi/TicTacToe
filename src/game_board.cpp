@@ -74,3 +74,12 @@ int GameBoard::check_win() {
 
     return -1;
 }
+
+bool GameBoard::is_filled() {
+    for (size_t i = 0; i < BOARD_SIZE; ++i)
+        for (size_t j = 0; j < BOARD_SIZE; ++j)
+            if (this->board[i][j] == 0)
+                return false;
+
+    return true;
+}

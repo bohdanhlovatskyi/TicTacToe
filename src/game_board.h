@@ -23,6 +23,8 @@ public:
 
     ErrorCode valid_move(size_t i, size_t j);
 
+    bool is_filled();
+
     int check_win();
 
     short to_bin(int state);

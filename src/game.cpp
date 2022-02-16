@@ -23,10 +23,10 @@ int Game::play() {
         // in the corresponding method
         switch (state) {
             case 1:
-                next_move = this->player->next_move(*this->board);
+                next_move = this->player->next_move(*this->board, state);
                 break;
             case 2:
-                next_move = this->ai->next_move(*this->board);
+                next_move = this->ai->next_move(*this->board, state);
                 break;
         }
 
