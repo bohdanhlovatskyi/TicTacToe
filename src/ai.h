@@ -11,25 +11,25 @@
 #include <random>
 #include <iostream>
 
+// interface method
 class AI {
 public:
     virtual std::pair<int, int> next_move(GameBoard& board, int status) = 0;
 };
 
-// TODO: looks lame
 class RandomAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override;
+    std::pair<int, int> next_move(GameBoard& board, int status) override final;
 };
 
 class PlayerAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override;
+    std::pair<int, int> next_move(GameBoard& board, int status) override final;
 };
 
 class MinimaxAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override;
+    std::pair<int, int> next_move(GameBoard& board, int status) override final;
 
 private:
     int evaluate(GameBoard& board);

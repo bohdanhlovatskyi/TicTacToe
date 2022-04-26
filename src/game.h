@@ -12,20 +12,25 @@
 
 class Game {
 public:
+    // first player goes by default, thus state{1}
+    Game(): first_player{nullptr}, second_player{nullptr},
+            board{nullptr}, visualizer{nullptr}, state{1} {};
 
-    Game(AI* ai, AI* player, GameBoard* board, Visualizer* vis, int state);
+    // priority inversion constructor, can be constructed for
+    // instance from values stored in file to make different experiments
+    Game(AI* fp, AI* sp, GameBoard* brd, Visualizer* vis): \
+                    first_player{fp}, second_player{sp},
+                    board{brd}, visualizer{vis}, state{1} {};
 
     int play(void);
-
     int get_state(void);
-
     ErrorCode set_state(int state);
 
 private:
     GameBoard* board;
-    AI* player{nullptr};
-    AI* ai{nullptr};
-    Visualizer* vis;
+    AI* first_player;
+    AI* second_player;
+    Visualizer* visualizer;
     int state;
 };
 

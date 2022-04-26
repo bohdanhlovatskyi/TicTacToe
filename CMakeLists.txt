@@ -66,11 +66,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE src)
 find_package(Boost 1.71.0 COMPONENTS program_options system REQUIRED)
 target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME} Boost::program_options Boost::system)
-
-find_package(Torch REQUIRED)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-
 						
 ##########################################################
 # Fixed CMakeLists.txt part 

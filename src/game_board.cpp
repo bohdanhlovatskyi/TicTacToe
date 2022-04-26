@@ -1,6 +1,5 @@
-//
-// Created by home on 15.02.2022.
-//
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 #include "game_board.h"
 
@@ -62,7 +61,6 @@ short GameBoard::to_bin(int state) {
 int GameBoard::check_win() {
 
     auto x = this->to_bin(1);
-
     for (int i = 0; i < 8; i++)
         if ((x & wc[i]) == wc[i])
             return 1;

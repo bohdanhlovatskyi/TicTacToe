@@ -1,47 +1,36 @@
-//
-// Created by home on 15.02.2022.
-//
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 #include "game.h"
-
-Game::Game(AI* ai, AI* player, GameBoard* board, Visualizer* vis, int state) {
-    this->ai = ai;
-    this->player = player;
-    this->board = board;
-    this->vis = vis;
-    this->state = state;
-}
 
 int Game::play() {
 
     for (;;) {
-        auto state = this->get_state();
+        auto state = get_state();
 
         std::pair<int, int> next_move;
 
-        // note that here we determine validity of next_move
-        // in the corresponding method
         switch (state) {
             case 1:
-                next_move = this->player->next_move(*this->board, state);
+                next_move = first_player->next_move(*board, state);
                 break;
             case 2:
-                next_move = this->ai->next_move(*this->board, state);
+                next_move = second_player->next_move(*board, state);
                 break;
         }
 
-        this->board->fil_cell(next_move.first, next_move.second, state);
+        board->fil_cell(next_move.first, next_move.second, state);
 
         // board should take visualizer class then
-        this->vis->visualize(*this->board);
+        visualizer->visualize(*board);
 
-        auto result = this->board->check_win();
+        auto result = board->check_win();
 
         if (result != -1) {
             return result;
         }
 
-        this->set_state(this->get_state() == 1 ? 2 : 1);
+        set_state(get_state() == 1 ? 2 : 1);
     }
 
 }
