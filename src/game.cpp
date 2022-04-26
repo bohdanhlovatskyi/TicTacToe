@@ -9,7 +9,6 @@ int Game::play() {
         auto state = get_state();
 
         std::pair<int, int> next_move;
-
         switch (state) {
             case 1:
                 next_move = first_player->next_move(*board, state);
@@ -24,10 +23,8 @@ int Game::play() {
         // board should take visualizer class then
         visualizer->visualize(*board);
 
-        auto result = board->check_win();
-
-        if (result != -1) {
-            return result;
+        if (board->check_win() != -1) {
+            return board->check_win();
         }
 
         set_state(get_state() == 1 ? 2 : 1);
@@ -36,12 +33,12 @@ int Game::play() {
 }
 
 int Game::get_state() {
-    return this->state;
+    return pl_move;
 }
 
 ErrorCode Game::set_state(int state) {
     if (state == 1 || state == 2) {
-        this->state = state;
+        pl_move = state;
         return ErrorCode::OK;
     }
 

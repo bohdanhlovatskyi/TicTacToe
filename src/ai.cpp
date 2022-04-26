@@ -5,8 +5,8 @@
 #include "game_board.h"
 #include "status.h"
 
-std::pair<int, int> PlayerAI::next_move(GameBoard &board, int status) {
-    (void) status;
+std::pair<int, int> PlayerAI::next_move(GameBoard &board, int pl_move) {
+    (void) pl_move;
 
     int i = -1, j = -1;
 
@@ -34,15 +34,18 @@ std::pair<int, int> RandomAI::next_move(GameBoard &board, int status) {
 }
 
 std::pair<int, int> MinimaxAI::next_move(GameBoard &board, int status) {
-
     auto best_res = -1000;
     int bi = -1, bj = -1;
+
+    initial_player = status;
 
     for (size_t i = 0; i < BOARD_SIZE; ++i) {
         for (size_t j = 0; j < BOARD_SIZE; ++j) {
             if (board.board[i][j] != 0) continue;
 
             board.board[i][j] = status;
+
+            // this smells...
             auto mm = minimax(board, 0, status == 1 ? 2 : 1);
             board.board[i][j] = 0;
 
@@ -51,7 +54,6 @@ std::pair<int, int> MinimaxAI::next_move(GameBoard &board, int status) {
                 bi = i;
                 bj = j;
             }
-
         }
     }
 
@@ -62,9 +64,9 @@ int MinimaxAI::evaluate(GameBoard &board) {
     auto res = board.check_win();
 
     int ret{};
-    if (res == 2) {
+    if (res != initial_player) {
         ret = -10;
-    } else if (res == 1) {
+    } else if (res == initial_player) {
         ret = 10;
     } else {
         ret = 0;

@@ -14,24 +14,25 @@
 // interface method
 class AI {
 public:
-    virtual std::pair<int, int> next_move(GameBoard& board, int status) = 0;
+    virtual std::pair<int, int> next_move(GameBoard& board, int pl_move) = 0;
 };
 
 class RandomAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override final;
+    std::pair<int, int> next_move(GameBoard& board, int pl_move) override final;
 };
 
 class PlayerAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override final;
+    std::pair<int, int> next_move(GameBoard& board, int pl_move) override final;
 };
 
 class MinimaxAI : public AI {
 public:
-    std::pair<int, int> next_move(GameBoard& board, int status) override final;
-
+    std::pair<int, int> next_move(GameBoard& board, int pl_move) override final;
 private:
+    int initial_player;
+
     int evaluate(GameBoard& board);
     int minimax(GameBoard& board, int depth, int status);
 };

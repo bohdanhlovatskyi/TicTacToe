@@ -10,53 +10,46 @@
 
 #include <map>
 
+std::map<size_t, AI*> m = {
+        {0, new PlayerAI{}},
+        {1, new RandomAI{}},
+        {2, new MinimaxAI{}}
+};
 
-/* BUGS:
- * - check win seems not work when table is full
- * - minimax could not go first, it makes stupid decisions as well
- * - add some delays I assume to (2, 3), (3, 2)
- * - add who wins
- * - add printing not only for one player
- * - minimax could not go first under any circumstances
- * - we need some game manager class I assume (to collect all the info ? )
- */
+AI* get_player() {
+    int status = -1;
+    std::cout << "Choose player: " << std::endl;
+    std::cin >> status;
+    if (!(status > 0 && status < 4)) {
+        std::cerr << "Bad choice..." << std::endl;
+        exit(1);
+    }
+
+    return m[status - 1];
+}
 
 int main(int argc, char* argv[]) {
     (void) argv; (void) argc;
 
-    std::map<size_t, AI*> m;
-    m[0] =  new PlayerAI{};
-    m[1] =  new RandomAI{};
-    m[2] =  new MinimaxAI{};
+    // all of the following information could be collected by
+    // GameManager class (imho it would be weird for a game to
+    // collect all the info), though at the current stage
+    // it would bring complexity that is not needed yet
 
-    // get state from the user (who should go first);
-    int status = -1;
+    // get the players
     std::cout << "real: 1, random: 2, minimax: 3" << std::endl;
+    AI* first_player = get_player();
+    AI* second_player = get_player();
 
-    // get first player
-    std::cout << "Who should go first?" << std::endl;
-    std::cin >> status;
-    if (!(status > 0 && status < 4)) {
-        std::cerr << "Bad choice..." << std::endl;
-        exit(1);
-    }
-    AI* first_player = m[status - 1];
-
-    std::cout << "Who should go second?" << std::endl;
-    std::cin >> status;
-    if (!(status > 0 && status < 4)) {
-        std::cerr << "Bad choice..." << std::endl;
-        exit(1);
-    }
-    AI* second_player = m[status - 1];
-
+    // create default board and visualizer - again, the most
+    // suitable place for their creation - game manager
+    // that would contain all the user - provided settings
     GameBoard* gb = new GameBoard();
     Visualizer* vis = new CLI_Visualizer();
 
-    // game should take ai as init
-    // as well as status who has to go first
     Game* game = new Game(first_player, second_player, gb, vis);
     int game_result = game->play();
+    std::cout << game_result << " player has won." << std::endl;
 
-    std::cout << game_result << std::endl;
+    return 0;
 }

@@ -14,13 +14,13 @@ class Game {
 public:
     // first player goes by default, thus state{1}
     Game(): first_player{nullptr}, second_player{nullptr},
-            board{nullptr}, visualizer{nullptr}, state{1} {};
+            board{nullptr}, visualizer{nullptr}, pl_move{1} {};
 
     // priority inversion constructor, can be constructed for
     // instance from values stored in file to make different experiments
     Game(AI* fp, AI* sp, GameBoard* brd, Visualizer* vis): \
                     first_player{fp}, second_player{sp},
-                    board{brd}, visualizer{vis}, state{1} {};
+                    board{brd}, visualizer{vis}, pl_move{1} {};
 
     int play(void);
     int get_state(void);
@@ -31,7 +31,7 @@ private:
     AI* first_player;
     AI* second_player;
     Visualizer* visualizer;
-    int state;
+    int pl_move;
 };
 
 #endif //TEMPLATE_GAME_H
