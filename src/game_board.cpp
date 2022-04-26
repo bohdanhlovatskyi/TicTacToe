@@ -3,6 +3,8 @@
 
 #include "game_board.h"
 
+// it was the most stupid way to do this like this, it simply could
+// not be extended properly
 const std::vector<short> wc = {
         // each row
         0b000000111,
@@ -17,7 +19,7 @@ const std::vector<short> wc = {
         0b001010100
 };
 
-ErrorCode GameBoard::valid_move(size_t i, size_t j) {
+ErrorCode GameBoard::valid_move(int i, int j) {
     if ((i < 0 || i >= BOARD_SIZE) ||
         (j < 0 || j >= BOARD_SIZE)) {
         return ErrorCode::INDEX_OUT_OF_BOUNDS;
@@ -31,7 +33,7 @@ ErrorCode GameBoard::valid_move(size_t i, size_t j) {
 }
 
 ErrorCode GameBoard::fil_cell(size_t i, size_t j, int player) {
-    ErrorCode valid = valid_move(i, j);
+    ErrorCode valid = valid_move(i, j); // -V107
     if (valid != ErrorCode::OK) {
         return valid;
     }
@@ -42,11 +44,9 @@ ErrorCode GameBoard::fil_cell(size_t i, size_t j, int player) {
 }
 
 short GameBoard::to_bin(int state) {
-    // TODO: 3 is lame
     short x = 0;
     for (size_t i = 0; i < 3; ++i) {
         for (size_t j = 0; j < 3; j++) {
-            // TODO: as well as 1 here is lame
             if (this->board[i][j] == state) {
                 x = ((1 << (3 * i + j)) | x);
             }
@@ -57,7 +57,6 @@ short GameBoard::to_bin(int state) {
     return x;
 }
 
-// TODO: add return codes
 int GameBoard::check_win() {
 
     auto x = this->to_bin(1);

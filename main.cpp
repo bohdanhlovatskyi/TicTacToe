@@ -10,6 +10,7 @@
 
 #include <map>
 
+
 std::map<size_t, AI*> m = {
         {0, new PlayerAI{}},
         {1, new RandomAI{}},
@@ -20,7 +21,7 @@ AI* get_player() {
     int status = -1;
     std::cout << "Choose player: " << std::endl;
     std::cin >> status;
-    if (!(status > 0 && status < 4)) {
+    if (!(status > 0 && status < AI_COUNT + 1)) {
         std::cerr << "Bad choice..." << std::endl;
         exit(1);
     }

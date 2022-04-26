@@ -1,44 +1,30 @@
-<mark>Template for your README. Remove all unused parts and instructions</mark>
+# Lab work <mark>3</mark>: <mark>Tic Tac Toe</mark>
+Authors (team): <mark>bohdan hlovatskyi: https://github.com/bohdanhlovatskyi </mark><br>
 
-# Lab work <mark>NUMBER</mark>: <mark>SHORT TOPIC</mark>
-Authors (team): <mark>AUTHORS WITH GITHUB LINKS</mark><br>
-Variant: <mark>VARIANT SHOULD BE HERE</mark>
 ## Prerequisites
 
-<mark>LIST LIBRARIES/TOOLS/OTHER UTILITIES THAT NEED TO BE INSTALLED (E.G. GCC, OPENMP, CMAKE ETC)</mark>
+Tested for C++17
 
 ### Compilation
+```shell
+./compile.sh
 
-<mark>HOW TO COMPILE YOUR PROGRAM? (RECOMMENDED: ./comile.sh)</mark>
+# or via CMakeLists direclty
+mkdir build
+cd build
+cmake .. && make
+```
 
-### Installation
-
-<mark>DESCRIBE THE INSTALLATION PROCESS (USE ./dependencies FOLDER)</mark>
-
-<mark>Note: For Python scripts, You must add `requirenments.txt` 
-file and add your env to the `.gitignore` file!</mark>
 
 ### Usage
+![](examples/example.png)
 
-<mark>PROVIDE AN EXAMPLE OF HOW TO RUN YOUR PROGRAM (IT CAN BE A_flag COMMAND LINE WITH INPUT AND EXPECTED OUTPUT)</mark>
+### What requires to be done? 
 
-<mark>Note: if your project needs or generates any data, media and so on -- put them
-into the data folder</mark> 
+GameManager class (imho it would be weird for a game to
+collect all the info), though at the current stage
+it would bring complexity that is not needed yet.
 
-### Important!
-
-<mark>WHAT ELSE SHOULD WE KNOW ABOUT YOUR WORK? (E.G. KNOWN ISSUES, BUGS, SPECIAL BEHAVIOR ETC)</mark>
-
-### Results
-
-<mark>DESCRIBE THE RESULTS OF THE WORK YOU DID. WHAT DID YOU LEARN OR FIND INTERESTING?</mark>
-
-# Additional tasks
-<mark>IF APPLICABLE, LIST ALL THE EXTRA FEATURES YOU ADDED. PROVIDE DETAILS<mark>
-
-# ATTENTION!
-  
-Additional tasks not listed in the previous paragraph would not be graded.
-
-Be sure to provide a complete list of authors.
-
+On changing visualizer on the fly - the most obvious solution for me is to create this visualizer in the game manager and run it in separate thread.
+This will make working with GUI much simpler, as we can substitute the calls to cout with passing message via queue to the visualizer.
+It won't be then needed by the Game class to conduct actual visualization.

@@ -10,6 +10,8 @@ std::pair<int, int> PlayerAI::next_move(GameBoard &board, int pl_move) {
 
     int i = -1, j = -1;
 
+    // this one smalls here... should be put out of the func in order
+    // to make the visualizer be able to reach the message
     while (board.valid_move(i, j) != ErrorCode::OK) {
         std::cout << "Enter the valid free cell" << std::endl;
         std::cin >> i >> j;
@@ -21,11 +23,11 @@ std::pair<int, int> PlayerAI::next_move(GameBoard &board, int pl_move) {
 std::pair<int, int> RandomAI::next_move(GameBoard &board, int status) {
     (void) status;
 
-    int i = rand() % 4, j = rand() % 4;
+    int i = rand() % BOARD_SIZE, j = rand() % BOARD_SIZE;
 
     while (board.valid_move(i, j) != ErrorCode::OK) {
-        i = rand() % 4;
-        j = rand() % 4;
+        i = rand() % BOARD_SIZE;
+        j = rand() % BOARD_SIZE;
     }
 
     std::cout << "RandomAI has made his move: (" << i << ", " << j << ")" << std::endl;
@@ -60,23 +62,24 @@ std::pair<int, int> MinimaxAI::next_move(GameBoard &board, int status) {
     return std::make_pair(bi, bj);
 }
 
-int MinimaxAI::evaluate(GameBoard &board) {
+int MinimaxAI::evaluate(GameBoard &board) const {
     auto res = board.check_win();
 
     int ret{};
-    if (res != initial_player) {
-        ret = -10;
+
+    if (res == -1) {
+        ret = 0;
     } else if (res == initial_player) {
         ret = 10;
-    } else {
-        ret = 0;
+    } else if (res != initial_player) {
+        ret = -10;
     }
 
     return ret;
 }
 
 int MinimaxAI::minimax(GameBoard &board, int depth, int status) {
-    auto score = this->evaluate(board);
+    auto score = evaluate(board);
 
     // one of the players win
     if (score != 0) return score;

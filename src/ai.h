@@ -1,6 +1,5 @@
-//
-// Created by home on 15.02.2022.
-//
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 
 #ifndef TEMPLATE_AI_H
 #define TEMPLATE_AI_H
@@ -10,6 +9,8 @@
 
 #include <random>
 #include <iostream>
+
+constexpr size_t AI_COUNT = 3;
 
 // interface method
 class AI {
@@ -33,7 +34,7 @@ public:
 private:
     int initial_player;
 
-    int evaluate(GameBoard& board);
+    int evaluate(GameBoard& board) const;
     int minimax(GameBoard& board, int depth, int status);
 };
 

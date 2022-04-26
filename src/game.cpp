@@ -18,7 +18,7 @@ int Game::play() {
                 break;
         }
 
-        board->fil_cell(next_move.first, next_move.second, state);
+        board->fil_cell(next_move.first, next_move.second, state); // -V106
 
         // board should take visualizer class then
         visualizer->visualize(*board);
